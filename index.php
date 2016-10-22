@@ -13,6 +13,9 @@
     $app->get('/', function () use ($twig) {
         echo $twig->render('index.html.twig', array());
     });
+    $app->get('/profile', function () use ($twig) {
+        echo $twig->render('ProfileEdit.html.twig', array());
+    });
 	$app->post('/', function () use ($twig) {
        // jump("/");
     });
