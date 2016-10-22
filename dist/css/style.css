@@ -5,7 +5,37 @@ form { margin:0 auto;}
 .btn-primary { background: #431c5b;}
 .lead { background: #259930; text-align: center;color: #FFFFFF; padding: 15px;}
 .container {width: 100%; margin: 0; padding: 0;}
-.form-signin .form-control {margin-bottom: 15px!important; max-width: 400px;}
+.form-signin .form-control {margin-bottom: 15px!important;}
 .navbar-brand { float: left;margin-right: 34px;}
-.navbar-fixed-top { position: relative; background: #FFFFFF; height: 100px; margin: 0px;}
+.navbar-fixed-top { position: relative; background: #FFFFFF; height: 100px; margin: 0px; border-bottom: 3px solid  #259930;}
+.nav-container { max-width: 1170px; margin: 0 auto;}
+.navbar-nav>li>a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 100px;
+}
+.navbar-brand {
+    height: 100px;
+    padding:10px 0;
+    line-height: 75px;
+    font-size: 24px;
+}
+.navbar-brand>img { float:left; margin-right: 34px}
+.navbar-default .navbar-toggle {
+    margin-top: 35px!important;
+}
+
+@media screen and (max-width: 780px) {
+	.navbar-nav>li>a {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    line-height: 50px;
+    background: #FFFFFF;
+    border-bottom: thin solid #259930;
+}
+.navbar-nav>li>a:hover {
+    background: #EEEEEE!important;}
+    .navbar-brand>img { margin-left: 15px; margin-right: 15px;
+}
+ }
 
