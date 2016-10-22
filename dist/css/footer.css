@@ -1,0 +1,15 @@
+body{
+	margin:0;
+}
+
+.wrapper{
+	min-height:95%;
+}
+
+.copyright{
+	height:5%px;
+	text-align:center;
+	padding:20px;
+	background:#99deb8;
+	width:100%;
+}
