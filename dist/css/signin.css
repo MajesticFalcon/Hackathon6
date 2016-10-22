@@ -1,9 +1,10 @@
 
+.navbar-fixed-top { position: relative; background: #FFFFFF; height: 100px; margin: 0px;}
 body {
-  padding-top: 40px;
   padding-bottom: 40px;
   background-color: #eee;
-}
+  background:url('../images/AdobeStock_88727700.jpg')no-repeat center center fixed; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover; background-size: cover;}
+
 
 .form-signin {
   max-width: 330px;
