@@ -13,6 +13,9 @@
     $app->get('/', function () use ($twig) {
         echo $twig->render('index.html.twig', array());
     });
+	$app->post('/', function () use ($twig) {
+       // jump("/");
+    });
 
     // Run application
     $app->run();
@@ -21,7 +24,7 @@
 	// print_pre($_POST);
 
 	if ($logged_in_user != ''){
-		jump("org/search.php");
+		
 	}
 	
 	if ($_POST['Action'] == 'Login'){
@@ -32,7 +35,14 @@
 		if (count($result) > 0){
 			$logged_in_user = $_POST['username'];
 			print_pre("Your logged in as ".$logged_in_user."");
-			jump("/org/search.php");
+			if ($result['registered'] == 1){
+				jump("org/search.php");
+			}else{
+				jump("org/register.php");
+			}
+		}else{
+			print_pre("Incorrect Login");
+			echo $twig->render('index.html.twig', array());
 		}
 		// print_pre(safe_value('s'));
 	}
