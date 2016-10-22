@@ -22,6 +22,7 @@ function jump($val){
 	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
 
 	header("Location: http://$host$uri/$val");
+	die();
 }
 
 function get_profile($id) {
