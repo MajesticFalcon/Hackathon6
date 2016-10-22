@@ -4,6 +4,7 @@
 	require_once("code/javascript.php");
 	require_once("code/style.php");
 	require_once("code/misc.php");
+	require_once("code/user.php");
 	
 	
 ?>

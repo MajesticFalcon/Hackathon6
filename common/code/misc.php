@@ -16,4 +16,11 @@ function safe_value($val){
 	// return mysqli_real_escape_string($sql_connection, $val);
 
 }
+
+function jump($val){
+	$host  = $_SERVER['HTTP_HOST'];
+	$uri   = rtrim(dirname($_SERVER['PHP_SELF']), '/\\');
+
+	header("Location: http://$host$uri/$val");
+}
 ?>
