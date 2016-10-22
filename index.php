@@ -16,6 +16,10 @@
     $app->get('/profile', function () use ($twig) {
         echo $twig->render('ProfileEdit.html.twig', array());
     });
+    $app->get('/update', function () use ($twig) {
+        echo $twig->render('update.html.twig', array());
+    });
+
 	$app->post('/', function () use ($twig) {
        // jump("/");
     });
