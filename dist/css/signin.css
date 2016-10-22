@@ -38,3 +38,8 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+.btn-primary { background: #431c5b;}
+.lead { background: #259930; text-align: center;color: #FFFFFF; padding: 15px;}
+.container {width: 100%; margin: 0; padding: 0;}
+.form-signin .form-control {margin-bottom: 15px!important;}
+.navvar-brand { float: left;margin-right: 34px;}

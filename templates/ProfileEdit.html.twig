@@ -1,269 +1,41 @@
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="dist/images/favicon.ico">
-
-    <title>St. Louis Service Share</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="dist/css/signin.css" rel="stylesheet">
-  </head>
-
   <body class="col-xs-10 col-xs-push-1">
   
         <div class="container">
         
-		<form>
-
+		<form method="post">
 		  <div class="form-group">
 		    <label for="orgName">Organization Name</label>
-		    <input type="email" class="form-control" id="orgName" aria-describedby="organizationName" placeholder="Enter Organization Name">
+		    <input value="{{profile.name}}" class="form-control" id="orgName" aria-describedby="organizationName" placeholder="Enter Organization Name">
 		  </div>
 		  
 		  <div class="form-group">
-		    <label for="orgName">Organization Phone Number</label>
-		    <input type="email" class="form-control" id="orgName" aria-describedby="organizationName" placeholder="Enter Organization Name">
+		    <label for="orgNum">Organization Phone Number</label>
+		    <input value="{{profile.phone}}" class="form-control" id="orgNum" aria-describedby="organizationName" placeholder="Enter Organization Name">
+		    <small id="organizationName" class="form-text text-muted">The best phone number for other organizations to use when contacting you.</small>
+		  </div>
+		  
+		  <div class="form-group">
+		    <label for="orgName">Organization Street Name</label>
+		    <input value="{{profile.address}}" class="form-control" id="orgAddress" aria-describedby="organizationName" placeholder="Enter Organization Name">
 		    <small id="organizationName" class="form-text text-muted">The best phone number for other organizations to use when contacting you.</small>
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="contactName">Contact Person</label>
-		    <input type="email" class="form-control" id="contactName" aria-describedby="contactPerson" placeholder="Enter Full Name of Contact Person">
+		    <input value="{{profile.poc}}" class="form-control" id="contactName" aria-describedby="contactPerson" placeholder="Enter Full Name of Contact Person">
 		  </div>
 		  
 		  <div class="form-group">
 		    <div class="form-check">
 		      <label class="form-check-label">
-		        <input type="radio" class="form-check-input" name="optionsRadios" id="cocYes" value="yes" checked>
+		        <input type="checkbox" class="form-check-input" name="coc" id="cocYes" checked>
 		        Yes, we are part of the Continuum of Care (COC)
 		      </label>
 		    </div>
-		    <div class="form-check">
-		    <label class="form-check-label">
-		        <input type="radio" class="form-check-input" name="optionsRadios" id="cocNo" value="no">
-		        No, we are not part of the Continuum of Care (COC)
-		      </label>
-		    </div>
   		  </div>
-
-		  <div class="form-group">
-		    <div class="form-check">
-		      <label class="form-check-label">
-		        <input type="radio" class="form-check-input" name="optionsRadios" id="cocYes" value="yes" checked>
-		        We Have One Homeless Prevention Funding Program.
-		      </label>
-		    </div>
-		    <div class="form-check">
-		    <label class="form-check-label">
-		        <input type="radio" class="form-check-input" name="optionsRadios" id="cocNo" value="no">
-		        We Have Multiple Homeless Prevention Funding Programs.
-		      </label>
-		    </div>
-  		  </div>
-  		  	
-	  	  <!-- Begin Program Information -->	  
-		  <div class="form-group">
-		    <label for="programName">Program Name</label>
-		    <input type="email" class="form-control" id="programName" aria-describedby="progName" placeholder="Enter Program Name">
-		    <small id="progName" class="form-text text-muted">Use different program names if you offer multiple Homeless Prevention Utility and Rent Assistance Programs.</small>
-		  </div>
-		  
-		  <div class="form-group">
-            <label for="Program1Amount">Prevention Funds Available for this Program</label>
-            <div class="input-group">
-              <div class="input-group-addon">$</div>
-              <input type="text" class="form-control" id="Program1Amount" placeholder="Amount Available">
-              <div class="input-group-addon">.00</div>
-            </div>
-          </div>
-		  
-		 <br />
-		 <label>Program Funding Restrictions</label>
-		 <br />
-
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      HUD Funded (AMI under 30%)
-		    </label>
-		  </div>
-		  		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Veterans - Dishonorable Discharge
-		    </label>
-		  </div>
-		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Veterans - Other than Honorable
-		    </label>
-		  </div>
-		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Veterans - Honorable
-		    </label>
-		  </div>
-		  
-		   <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Families with Children Under 5
-		    </label>
-		  </div>
-		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Families with Children Under 18
-		    </label>
-		  </div>
-		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Youth Only 16-24
-		    </label>
-		  </div>
-		  
-		  	<div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Zip Codes Served
-		    </label>
-		    <input type="text" class="bootstrap-tagsinput">
-		  </div>
-		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Private Funding - No Restrictions
-		    </label>
-		  </div>
-		  
-		  <div class="form-check">
-		    <label class="form-check-label">
-		      <input type="checkbox" class="form-check-input">
-		      Private Funding - With Restrictions
-		    </label>
-		    <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Describe restriction(s)."></textarea>
-		  </div>
-
-		 <br />	
-          <!-- End Program Information -->		  
-
-
-		  		  <!-- Other Services - v2.0
-          <br />
-		  <div class="form-group">
-		    <label for "otherServices">Other prevention help at this agency:</label>
-    		    <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Transportation Assistance
-                    </label>
-                </div>
-    		    <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Career Guidance/Job Placement
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Career Clothing
-                    </label>
-                </div>
-    		    <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Mental Health
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Gambling
-                    </label>
-                </div>
-    		    <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Substance Abuse
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Domestic Violence
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Divorce
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Family/Roommate Dispute Mediation
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Disaster Relief (Flood/Fire/Etc.)
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Home Repair
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Budget Education
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Medical Bills
-                    </label>
-                </div>
-               <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Hospitalized (Lost Job/Lost Hours)
-                    </label>
-                </div>
-                <div class="checkbox">
-                    <label>
-                      <input type="checkbox"> Disabled
-                    </label>
-                </div> 
-		     End v2.0 Input-->
-		  
-		  <br />
-		  <button type="submit" class="btn btn-primary">Let's Prevent Homelessness!</button>
+		  <input name="Action" value="Submit" type="submit"></input>
 		</form>
-	</div><!-- /.container -->   
 
-     
-      
-  </div> 
-    <!-- /container -->
-
-
-    <!-- Bootstrap core JavaScript
-    
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="dist/js/bootstrap.js"></script>
+		  
   </body>
-</html>

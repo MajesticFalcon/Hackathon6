@@ -23,4 +23,10 @@ function jump($val){
 
 	header("Location: http://$host$uri/$val");
 }
+
+function get_profile($id) {
+	// return array("id" => 1, "name" => "CWEP", "Address" => "100 s main");
+	return id_q("SELECT * from hackathon.providers WHERE `uuid` = ".$id);
+}
+
 ?>
