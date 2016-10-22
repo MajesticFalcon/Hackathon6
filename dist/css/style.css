@@ -1,10 +1,29 @@
 @charset "UTF-8";
 /* CSS Document */
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
 .form-group { margin: 20px auto;}
-form { margin:0 auto;}
+form {margin:0 auto;}
+.row { 
+    margin: 0 auto;}
 .btn-primary { background: #431c5b;}
 .lead { background: #259930; text-align: center;color: #FFFFFF; padding: 15px;}
-.container {width: 100%; margin: 0; padding: 0;}
+.container {width: 100%; margin: 0; padding: 0; padding-bottom: 50px;}
 .form-signin .form-control {margin-bottom: 15px!important;}
 .navbar-brand { float: left;margin-right: 34px;}
 .navbar-fixed-top { position: relative; background: #FFFFFF; height: 100px; margin: 0px; border-bottom: 3px solid  #259930;}
