@@ -18,6 +18,9 @@
 		$profile = get_profile($id);
         echo $twig->render('ProfileEdit.html.twig', array('profile' => $profile));
     });
+    $app->get('/program', function () use ($twig) {
+        echo $twig->render('program.html');
+    });
 	$app->post('/profile/:id', function ($id) use ($twig) {
 		print_pre("Information Entered Completely");
         echo $twig->render('ProfileEdit.html.twig', array());
