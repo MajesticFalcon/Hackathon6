@@ -1,11 +1,11 @@
 @charset "UTF-8";
 /* CSS Document */
-.form-group { max-width: 400px; margin: 20px auto;}
-form {max-width: 400px; margin:0 auto;}
+.form-group { margin: 20px auto;}
+form { margin:0 auto;}
 .btn-primary { background: #431c5b;}
 .lead { background: #259930; text-align: center;color: #FFFFFF; padding: 15px;}
 .container {width: 100%; margin: 0; padding: 0;}
-.form-signin .form-control {margin-bottom: 15px!important;}
+.form-signin .form-control {margin-bottom: 15px!important; max-width: 400px;}
 .navbar-brand { float: left;margin-right: 34px;}
 .navbar-fixed-top { position: relative; background: #FFFFFF; height: 100px; margin: 0px;}
 
