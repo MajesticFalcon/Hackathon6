@@ -23,6 +23,10 @@
     });
 	$app->post('/profile/:id', function ($id) use ($twig) {
 		print_pre("Information Entered Completely");
+		update_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."'" );
+		
+		print_pre($_POST);
+		jump("profile/".$id);
         echo $twig->render('ProfileEdit.html.twig', array());
     });
 	$app->get('/search', function () use ($twig) {
