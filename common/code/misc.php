@@ -7,7 +7,13 @@ function print_pre($val){
 }
 
 function safe_value($val){
-	return mysql_real_escape_string($val);
+	//I cant get this damn mysqli escape shit to work
+	return $val;
+	// print_pre($val);
+	// print_pre(array(mysqli_real_escape_string($link, "sadafsdfasdf")));
+	// check_sql_connection();
+	// print_pre("sql connection ".$sql_connection);
+	// return mysqli_real_escape_string($sql_connection, $val);
 
 }
 ?>

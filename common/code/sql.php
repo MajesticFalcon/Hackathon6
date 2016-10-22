@@ -6,12 +6,14 @@
 	define("SQL_DB", "hackathon");
 	define("SQL_PORT", "3306");
 	//This function should be ran before each query.
-
+	global $sql_connection;
+	
 function check_sql_connection(){
 	if(!SQL_CONNECTED){
 		global $sql_connection;
 		$sql_connection = mysqli_connect(SQL_HOST,SQL_USERNAME,SQL_PASSWORD,SQL_DB, SQL_PORT) or die("Cannot connect to DB");
 		define("SQL_CONNECTED", true);
+			
 	}
 }
 

@@ -26,9 +26,12 @@
 	
 	if ($_POST['Action'] == 'Login'){
 		//Im going to let the designers worry about if the fields have been entered
-		crypt(safe_value($_POST['password']),'$2a$09$anexamplestringforsalt$');
+		$crypted_pass = "";
+		$crypted_pass = crypt(safe_value($_POST['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
+		$result = select_q("SELECT * from hackathon.users WHERE `username` = '".safe_value($_POST['username'])."' and `password` = '".$crypted_pass."'"));
+		print_pre("SELECT * from hackathon.users WHERE `username` = '".safe_value($_POST['username'])."' and `password` = '".$crypted_pass."'");
+		// print_pre(safe_value('s'));
 	}
-		print_pre("DS");
-		print_pre("DS2");
+		// )
 ?>
 
