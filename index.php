@@ -112,6 +112,9 @@
     });
 
 	$app->post('/', function () {
+		if($_POST['Action'] == 'Register'){
+		  jump("register");
+		}
 		//Im going to let the designers worry about if the fields have been entered
 		$crypted_pass = "";
 		$crypted_pass = crypt(safe_value($_POST['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
