@@ -34,36 +34,27 @@
         echo $twig->render('ProfileEdit.html.twig');
     });
 
+    $app->post('/profile', function () use ($twig) {
+        $provider = new Hackathon\Provider();
+        if ($provider->verifyProvider($_POST)) {
+            $provider->insertProvider($_POST);
+            jump('program');
+        } else {
+            echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
+        }
+    });
+
 	$app->get('/profile/:id', function ($id) use ($twig) {
 		$profile = get_profile($id);
         echo $twig->render('ProfileEdit.html.twig', array('profile' => $profile));
     });
 
-    $app->post('/profile/:id', function ($id) use ($twig) {
-        // print_pre($_POST);
-        // die();
-        print_pre("Information Entered Completely");
-        if (is_null($_POST['coc'])){
-            $_POST['coc'] = 1;
-        }
-        // action_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."', `coc` = '".safe_value($_POST['coc'])."'" );
-        // print_pre($_POST);
-        jump("profile/".$id);
-    });
-
-	$app->post('/provider', function () {
-		$provider = new Hackathon\Provider();
-		if ($provider->verifyProvider($_POST)) {
-			$provider->insertProvider($_POST);
-			jump('program');
-		} else {
-			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
-		}
-	});
-
-	$app->post('/provider/:id', function ($id) {
+	$app->post('/profile/:id', function ($id) use($twig) {
 		// TODO if logged in user owns provider
 		$provider = new Hackathon\Provider();
+		if (is_null($_POST['coc'])){
+			$_POST['coc'] = 1;
+		}
 		if ($provider->verifyProvider($_POST)) {
 			$provider->updateProvider($id, $_POST);
 			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
