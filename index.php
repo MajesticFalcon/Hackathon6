@@ -14,6 +14,17 @@
     $app->get('/', function () use ($twig, $profile) {
 		echo $twig->render('index.html.twig', array());
     });
+	$app->get('/register', function () use ($twig) {
+		echo $twig->render('register.html.twig', array());
+	});
+	$app->post('/register', function () use ($twig) {
+        $user = new Hackathon\User($_POST);
+        if ($user->verifyUser($_POST)) {
+            jump('program');
+        } else {
+			echo $twig->render('register.html.twig', array('user' => $_POST, 'errors' => $user->getErrors()));
+		}
+	});
 	$app->get('/profile/:id', function ($id) use ($twig) {
 		$profile = get_profile($id);
         echo $twig->render('ProfileEdit.html.twig', array('profile' => $profile));
@@ -25,7 +36,10 @@
         $program = new Hackathon\Program($_POST);
         // Joe use this $program
         $programArray = $program->getProgram();
-        var_dump($programArray);
+		$programRequirements = $program->getProgramRequirements();
+		$programZips = $program->getZipcodes();
+
+        var_dump($programArray, $programRequirements, $programZips);
         exit;
     });
 	$app->get('/program/update/:id', function ($id) use ($twig) {

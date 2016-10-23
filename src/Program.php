@@ -1,7 +1,7 @@
 <?php
 
 namespace Hackathon;
-require_once '../common/code/sql.php';
+require_once __DIR__.'/../common/code/sql.php';
 
 class Program
 {
@@ -90,6 +90,26 @@ class Program
     }
 
     function getProgram() {
-        return $this->program;
+        $arr = array();
+        $arr['program_name'] = $this->program['program_name'];
+        $arr['amount'] = number_format($this->program['amount'], 2);
+        return $arr;
+    }
+
+    function getProgramRequirements() {
+        $arr = $this->program;
+        unset($arr['program_name']);
+        unset($arr['amount']);
+        $result = array();
+        foreach ($arr as $attr => $val) {
+            if ($val) {
+                $result[] = $attr;
+            }
+        }
+        return $result;
+    }
+
+    function getZipcodes() {
+        return $this->program['zipCodes'];
     }
 }

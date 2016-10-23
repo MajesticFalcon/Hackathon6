@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block css %}
+    <link rel="stylesheet" href="/dist/css/signin.css" />
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+
+        <div class="starter-template">
+            <p class="lead">Search available resources for utility & rent assistance in the St. Louis region.</p>
+        </div>
+        <form class="form-signin" method="post">
+            {% if errors %}
+                <div class="alert alert-danger col-xs-12">
+                    {{ errors }}
+                </div>
+            {% endif %}
+            <h2 class="form-signin-heading">Register for access.</h2>
+            <label for="inputEmail" class="sr-only">Email address</label>
+            <input name="username" type="email" id="inputEmail" value="{{ user.username }}" class="form-control" placeholder="Email address" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input name="password" type="password" id="inputPassword"  autocomplete="off" class="form-control" placeholder="Password" required>
+            <label for="verifyPassword" class="sr-only">Verfify Password:</label>
+            <input name="verify_password" type="password" id="verifyPassword" autocomplete="off" class="form-control" placeholder="Verify Password" required>
+            <input type="submit" name="Action" value="Sign Up" class="btn btn-lg btn-primary btn-block"></input>
+            <br />
+            <!-- This is beyond our current scope !-->
+            <!-- <a href="/forgot.html">Forgot Password?</a> !-->
+        </form>
+    </div>
+    <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="/assets/js/ie10-viewport-bug-workaround.js"></script>
+{% endblock %}
