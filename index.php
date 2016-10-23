@@ -1,5 +1,7 @@
 <?php
-  require_once 'vendor/autoload.php';
+	session_start();
+
+    require_once 'vendor/autoload.php';
 
     $loader = new Twig_Loader_Filesystem('templates/');
     $twig = new Twig_Environment($loader);
@@ -8,12 +10,22 @@
 
     // instantiate the App object
     $app = new \Slim\Slim();
-	
-	
+
+	/** Check if a user is logged in */
+    $app->get('/:method', function($request_uri) use ($twig, $app) {
+		if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
+			$alert = 'You must be logged in to access all system functionality.';
+			echo $twig->render('index.html.twig', array('alert' => $alert));
+		} else {
+			$app->pass();
+		}
+    })->conditions(array('method' => '.+'));
+
     // Add route callbacks
     $app->get('/', function () use ($twig, $profile) {
 		echo $twig->render('index.html.twig', array());
     });
+
 
 	/** REGISTER **/
 	$app->get('/register', function () use ($twig) {
@@ -108,6 +120,7 @@
     });
 
     $app->get('/logout', function () use ($twig) {
+		$_SESSION['logged_in'] = false;
         jump('');
     });
 
@@ -120,6 +133,7 @@
 		$crypted_pass = crypt(safe_value($_POST['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
 		$result = id_q("SELECT * from hackathon.users WHERE `username` = '".safe_value($_POST['username'])."' and `password` = '".$crypted_pass."'");
 		if (count($result) > 0){
+			$_SESSION['logged_in'] = true;
 			$logged_in_user = $_POST['username'];
 			print_pre("Your logged in as ".$logged_in_user."");
 			if ($result['registered'] == 1){

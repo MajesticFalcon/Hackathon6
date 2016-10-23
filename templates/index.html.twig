@@ -4,15 +4,12 @@
 {% endblock %}
 
 {% block content %}
-
 <div class="container">
-
-
     <div class="starter-template">
         <p class="lead">Search available resources for utility & rent assistance in the St. Louis region.</p>
     </div>
 
-    <form class="form-signin" method="post">
+    <form class="form-signin" method="post" action="/">
         {% if error %}
         <div class="alert alert-danger">
             {{ error }}
