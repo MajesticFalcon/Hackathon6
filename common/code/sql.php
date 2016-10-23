@@ -22,7 +22,7 @@ function action_q($sql){
 	global $sql_connection;
 	check_sql_connection();
 	//This error handling is shit.. 
-	mysqli_query($sql_connection, $sql) or die("MYSQL ERROR");
+	mysqli_query($sql_connection, $sql);
 	$id = mysqli_insert_id($sql_connection);
 	return $id;
 }
@@ -31,7 +31,7 @@ function select_q($sql){
 	global $sql_connection;
 	check_sql_connection();
 	$results = array();
-	$query = mysqli_query($sql_connection, $sql) or die("MYSQL ERROR");
+	$query = mysqli_query($sql_connection, $sql);
 	while($mysql_query_rows = mysqli_fetch_assoc($query)){
 		$results[] = $mysql_query_rows;
 	}
@@ -42,7 +42,7 @@ function id_q($sql){
 	global $sql_connection;
 	check_sql_connection();
 	$results = array();
-	$query = mysqli_query($sql_connection, $sql) or die("MYSQL ERROR");
+	$query = mysqli_query($sql_connection, $sql);
 	while($mysql_query_rows = mysqli_fetch_assoc($query)){
 		$results[] = $mysql_query_rows;
 	}

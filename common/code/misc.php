@@ -8,6 +8,9 @@ function print_pre($val){
 
 function safe_value($val){
 	//I cant get this damn mysqli escape shit to work
+	if (is_null($val)){
+		$val = 0;
+	}
 	return $val;
 	// print_pre($val);
 	// print_pre(array(mysqli_real_escape_string($link, "sadafsdfasdf")));
