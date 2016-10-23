@@ -22,7 +22,11 @@
         echo $twig->render('program.html');
     });
     $app->post('/program', function() use ($twig) {
-        var_dump($_POST);
+        $program = new Hackathon\Program($_POST);
+        // Joe use this $program
+        $programArray = $program->getProgram();
+        var_dump($programArray);
+        exit;
     });
 	$app->get('/program/update/:id', function ($id) use ($twig) {
 		echo $twig->render('program.html');
@@ -32,7 +36,18 @@
     });
 	$app->post('/search', function () use ($twig) {
 		print_pre($_POST);
+		$requires = array();
+		//This is gross O(n) queries You should be ashamed!
+		foreach($_POST['requirements'] as $requirement){
+			// print_pre("SD");
+			array_push($requires,id_q("SELECT uuid FROM hackathon.service_requirement WHERE `ack` = '".safe_value($requirement)."'"));
+		}
+		// print_pre($requires);
+		// die();
+		$a = id_q("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement.uuid = program_link_service_requirement.service_requirement_uuid) WHERE `service_requirement.uuid` = ".safe_value($requirement)." AND `budget` <= ".safe_value($_POST['budget'])."  ");
+		print_pre($a);
 		die();
+		// select_q("SELECT uuid FROM hackathon.service_requirement WHERE `name")
         echo $twig->render('search.html.twig');
     });
 	$app->post('/profile/:id', function ($id) use ($twig) {

@@ -10,9 +10,7 @@ body{
 	background:#f9bc16;
 	width:100%;
 	text-align: right;
-	 position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+	position: relative;
+	float: left;
 }
 .footer-wrapper { max-width: 1170px; margin: 0 auto; }

@@ -1,4 +1,9 @@
 {
+    "autoload": {
+        "psr-4": {
+            "Hackathon\\":"src/"
+        }
+    },
     "require": {
         "slim/slim": "^2.6",
         "twig/twig": "^1.26"

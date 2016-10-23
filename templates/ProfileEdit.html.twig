@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block content %}
 
-    <div class="container" style="z-index:1;">
+    <div class="container" style="z-index:1; background:#eee;">
 
         <form method="post" class="col-xs-10 col-xs-push-1">
 
@@ -57,13 +57,13 @@
             <div class="form-group">
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="optionsRadios" id="cocYes"
-                               value="yes" {% if profile.coc != 0 %} checked {% endif %}>
+                        <input type="checkbox" class="form-check-input" name="coc" id="cocYes"
+                            value="0" {% if profile.coc != 0 %} checked {% endif %}>
                         Yes, we are part of the Continuum of Care (COC)
                     </label>
                 </div>
             </div>
-            <div class="row"><input type="submit" name="Action" value="Submit" type="submit" class="btn btn-primary"></input></div>
+            <input type="submit" name="Action" value="Submit" type="submit" class="btn btn-primary"></input>
 
 
             <br/>

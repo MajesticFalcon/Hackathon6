@@ -4,21 +4,21 @@
 
         <div class="container">
 
-            <form>
+            <form method="post">
                 <h1>Search for Utility and Rent Assistance</h1>
 
                 <div class="form-group">
                     <label for="Program1Amount">Amount Needed</label>
                     <div class="input-group">
                         <div class="input-group-addon">$</div>
-                        <input type="text" class="form-control" id="Program1Amount" placeholder="Amount Available">
+                        <input name="budget" type="text" class="form-control" id="Program1Amount" placeholder="Amount Needed">
                         <div class="input-group-addon">.00</div>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="ZipCode">Zip Code</label>
-                    <input type="text" class="form-control" id="orgName" aria-describedby="ZipCode"
+                    <input name="zip" type="text" class="form-control" id="orgName" aria-describedby="ZipCode"
                            placeholder="Zip Code">
                 </div>
 
@@ -29,50 +29,85 @@
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
-                            AMI under 30%
+                            <input value="ami" name="requirements[]" type="checkbox" class="form-check-input">
+                            HUD AMI under 30%
                         </label>
                     </div>
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
+                            <input value="veteran_dishonor" name="requirements[]"type="checkbox" class="form-check-input">
                             Veterans - Dishonorable Discharge
                         </label>
                     </div>
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
-                            Veterans - Other than Honorable
+                            <input value="veteran_any" name="requirements[]" type="checkbox" class="form-check-input">
+                            All Veterans
                         </label>
                     </div>
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
+                            <input value="veteran_honorable" name="requirements[]" type="checkbox" class="form-check-input">
                             Veterans - Honorable
                         </label>
                     </div>
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
+                            <input value="family_under_5" name="requirements[]" type="checkbox" class="form-check-input">
                             Families with Children Under 5
                         </label>
                     </div>
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
+                            <input value="family_under_18" name="requirements[]" type="checkbox" class="form-check-input">
                             Families with Children Under 18
                         </label>
                     </div>
 
                     <div class="form-check">
                         <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input">
+                            <input value="youth_16_24" name="requirements[]" type="checkbox" class="form-check-input">
                             Youth Only 16-24
+                        </label>
+                    </div>
+					
+					<div class="form-check">
+                        <label class="form-check-label">
+                            <input value="sixty_plus" name="requirements[]" type="checkbox" class="form-check-input">
+                            Seniors 60+
+                        </label>
+                    </div>
+					
+					<div class="form-check">
+                        <label class="form-check-label">
+                            <input value="private_restricted" name="requirements[]" type="checkbox" class="form-check-input">
+                            Private Fund With Restrictions
+                        </label>
+                    </div>
+					
+					<div class="form-check">
+                        <label class="form-check-label">
+                            <input value="private_funds" name="requirements[]" type="checkbox" class="form-check-input">
+							Private Fund Without Restrictions
+                        </label>
+                    </div>
+					
+					<div class="form-check">
+                        <label class="form-check-label">
+                            <input value="resident_city" name="requirements[]" type="checkbox" class="form-check-input">
+                            St. Louis City Residents
+                        </label>
+                    </div>
+					
+					<div class="form-check">
+                        <label class="form-check-label">
+                            <input value="resident_county" name="requirements[]" type="checkbox" class="form-check-input">
+							St. Louis County Residents
                         </label>
                     </div>
 
@@ -163,7 +198,7 @@
              End v2.0 Input-->
 
                     <br/>
-                    <button type="submit" class="btn btn-primary">Find Funds</button>
+                    <input type="submit" class="btn btn-primary"></input>
             </form>
         </div><!-- /.container -->
 
