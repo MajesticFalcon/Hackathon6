@@ -88,7 +88,7 @@ $app->get('/program', function () use ($twig) {
     $userId = $_SESSION['user_id'];
     $userArr = $user->fetchUser($userId);
     $programs = $program->getProgramsForProvider($userArr['p_id']);
-    echo $twig->render('program.html');
+    echo $twig->render('program.html', array('programs' => $programs) );
 });
 $app->post('/program', function () use ($twig) {
     $program = new Hackathon\Program($_POST);
