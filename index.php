@@ -34,6 +34,9 @@
 	$app->get('/search', function () use ($twig) {
         echo $twig->render('search.html.twig');
     });
+    $app->get('/logout', function () use ($twig) {
+        jump('');
+    });
 	$app->post('/search', function () use ($twig) {
 		print_pre($_POST);
 		$requires = array();
