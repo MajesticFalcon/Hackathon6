@@ -46,7 +46,13 @@ function id_q($sql){
 	while($mysql_query_rows = mysqli_fetch_assoc($query)){
 		$results[] = $mysql_query_rows;
 	}
-	return $results[0];
+	if (is_array($results) == true){
+		if(!empty($results)){
+			return $results[0];
+		}
+	}else{
+		return $results;
+	}
 }
 // action_q("INSERT into hackathon.test (`id`) VALUES (1)");
 // select_q("SELECT * FROM hackathon.test where `id` = 1");

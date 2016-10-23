@@ -14,6 +14,9 @@
 
 	/** Check if a user is logged in */
     $app->get('/:method', function($request_uri) use ($twig, $app) {
+		if(preg_match("/register/", $request_uri)){
+			$app->pass();
+		}
 		if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] === false) {
 			$alert = 'You must be logged in to access all system functionality.';
 			echo $twig->render('index.html.twig', array('alert' => $alert));
@@ -35,6 +38,7 @@
 	$app->post('/register', function () use ($twig) {
         $user = new Hackathon\User($_POST);
         if ($user->verifyUser($_POST)) {
+			$_SESSION['logged_in'] = true;
             $p_id = $user->insertUser($user->getUser());
 			jump('profile/'.$p_id);
         } else {
@@ -102,7 +106,7 @@
     });
 
 	$app->post('/search', function () use ($twig) {
-		print_pre($_POST);
+		// print_pre($_POST);
 		$requires = array();
 		//This is gross O(n) queries You should be ashamed!
 		foreach($_POST['requirements'] as $requirement){
@@ -112,7 +116,7 @@
 		// print_pre($requires);
 		// die();
 		$a = select_q("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `service_requirement_uuid` = '".safe_value($requirement)."' AND `budget` <= ".safe_value($_POST['budget'])."  ");
-		print_pre($a);
+		// print_pre($a);
 		echo $twig->render('results.html.twig', array('agencies' => $a));
 
 		die();
