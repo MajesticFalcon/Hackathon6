@@ -39,8 +39,12 @@ $app->post('/register', function () use ($twig) {
     $user = new Hackathon\User($_POST);
     if ($user->verifyUser($_POST)) {
         $_SESSION['logged_in'] = true;
+		$user = new Hackathon\User();
+		$userId = $_SESSION['user_id'];
+		$userArr = $user->fetchUser($userId);
         $p_id = $user->insertUser($user->getUser());
-        jump("profile/" . $result['p_id']);
+        jump("profile/" . $userArr['p_id']);
+		
     } else {
         echo $twig->render('register.html.twig', array('user' => $_POST, 'errors' => $user->getErrors()));
     }
@@ -88,21 +92,27 @@ $app->get('/program', function () use ($twig) {
     $userId = $_SESSION['user_id'];
     $userArr = $user->fetchUser($userId);
     $programs = $program->getProgramsForProvider($userArr['p_id']);
-    echo $twig->render('program.html', array('user_programs' => $programs) );
+    echo $twig->render('program.html', array('user_programs' => $programs));
 });
 
 $app->get('/program/:id', function ($id) use ($twig) {
     $program = new Hackathon\Program();
     $record = $program->getProgramRecord($id);
+	// print_pre($program);
     $requirements = array();
+	// print_pre($record);
     foreach ($record['requirements'] as $requirement) {
-        $requirements[$requirement] = 1;
+		// print_pre($requirement);
+        $requirements[$requirement['ack']] = 1;
+        // $requirements[$requirement['ack']] = 1;
     }
     $record['requirements'] = $requirements;
+
     $user = new Hackathon\User();
     $userId = $_SESSION['user_id'];
     $userArr = $user->fetchUser($userId);
     $programs = $program->getProgramsForProvider($userArr['p_id']);
+//    var_dump($record);exit;
     echo $twig->render('program.html', array('program' => $record, 'user_programs' => $programs));
 });
 
@@ -115,15 +125,19 @@ $app->post('/program', function () use ($twig) {
     $programArray = $program->getProgram();
     $programRequirements = $program->getProgramRequirements();
     $programZips = $program->getZipcodes();
+    // print_pre("hello");
 
     $result = array_merge($programArray, $programRequirements, $programZips);
-    $program->insertProgram($result);
-    $alert = 'Program was successfully created.';
-    $program->insertProgram($result, $userArr['p_id']);
-
-    $twig->render('program.html', array('alert'=>$alert, 'program' => $_POST));
-    jump('/program');
+	$test = $program->insertProgram($result, $userArr['p_id']);
+	// print_pre($test);
+	// die();
+	// print_pre($_POST);
+    // $twig->render('program.html', array('program' => $_POST));
+	// print_pre("here");
+	//we need program uuid which we dont have
+    jump('program/'.$test);
 });
+
 
 /** SEARCH **/
 $app->get('/search', function () use ($twig) {
@@ -135,26 +149,27 @@ $app->get('/search', function () use ($twig) {
     echo $twig->render('search.html.twig', array('zip_codes' => $zip_codes));
 });
 
+
 $app->post('/search', function () use ($twig) {
-	$program = new Hackathon\Program();
+    $program = new Hackathon\Program();
     $req_uuids = array();
-	if(isset($_POST['requirements'])){
-		foreach ($_POST['requirements'] as $requirement) {
-			array_push($req_uuids, id_q("SELECT uuid FROM hackathon.service_requirement WHERE `ack` = '" . safe_value($requirement) . "'")['uuid']);
-		}
-	}
-	$sql = "";
-	$c = array();
-	if (count($req_uuids) >= 12){
-		print_pre("ALL");
-		$sql = ("SELECT Distinct(program.uuid) FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `budget` > 0");
-		$a = select_q($sql);
-		foreach($a as $b){
-			$c[] = ($program->getProgramRecord($b['uuid']));
-		}
-	}else{
-		$c = $program->getProgramsFromRequirements($req_uuids);
-	}
+    if (isset($_POST['requirements'])) {
+        foreach ($_POST['requirements'] as $requirement) {
+            array_push($req_uuids, id_q("SELECT uuid FROM hackathon.service_requirement WHERE `ack` = '" . safe_value($requirement) . "'")['uuid']);
+        }
+    }
+    $sql = "";
+    $c = array();
+    if (count($req_uuids) >= 12) {
+        print_pre("ALL");
+        $sql = ("SELECT Distinct(program.uuid) FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `budget` > 0");
+        $a = select_q($sql);
+        foreach ($a as $b) {
+            $c[] = ($program->getProgramRecord($b['uuid']));
+        }
+    } else {
+        $c = $program->getProgramsFromRequirements($req_uuids);
+    }
     echo $twig->render('results.html.twig', array('agencies' => $c));
 });
 
@@ -179,7 +194,7 @@ $app->post('/', function () use ($twig) {
         if ($result['registered'] == 1) {
             jump("search");
         } else {
-            jump("profile/".$result['p_id']);
+            jump("profile/" . $result['p_id']);
         }
     } else {
         $error = 'Your username or password does not match the information we have on file.';

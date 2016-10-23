@@ -116,13 +116,17 @@ class Program
 
     function getZipcodes()
     {
+		
         return array('zipCodes' => $this->program['zipCodes']);
     }
 
 
     function getProgramRecord($programUuid)
     {
+		//This is the issue
         $program = id_q("select * from program where uuid = {$programUuid}");
+		// print_pre("select name, phone from providers where uuid = {$program['provider_uuid']}");
+		// die();
         $provider = id_q("select name, phone from providers where uuid = {$program['provider_uuid']}");
         if (sizeof($program)) {
             $zips = $this->getZipsForProgram($programUuid);
@@ -158,6 +162,8 @@ class Program
         }
         $this->insertZipsForProgram($programUuid, $zipCodeUuids);
         $this->insertRequirementsForProgram($programUuid, $reqUuids);
+		return $programUuid;
+		// print_pre("HERE");
     }
 
     function insertZipsForProgram($programUuid, $zipUuids)
