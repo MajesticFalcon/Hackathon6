@@ -72,10 +72,10 @@
 		if (!isset($_POST['coc'])) {
 			$_POST['coc'] = 1;
 		}
-		if ($provider->verifyProvider($_POST)) {
-			$provider->updateProvider($id, $_POST);
+		if (!$provider->verifyProvider($_POST)) {
 			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
 		} else {
+			$provider->updateProvider($id, $_POST);
 			$alert = 'Your provider has been successfully updated.';
 			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'alert' => $alert));
 		}
