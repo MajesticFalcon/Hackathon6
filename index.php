@@ -99,7 +99,11 @@ $app->get('/program/:id', function ($id) use ($twig) {
         $requirements[$requirement] = 1;
     }
     $record['requirements'] = $requirements;
-    $twig->render('program.html', array('program' => $record));
+    $user = new Hackathon\User();
+    $userId = $_SESSION['user_id'];
+    $userArr = $user->fetchUser($userId);
+    $programs = $program->getProgramsForProvider($userArr['p_id']);
+    echo $twig->render('program.html', array('program' => $record, 'user_programs' => $programs));
 });
 
 $app->post('/program', function () use ($twig) {
@@ -111,11 +115,10 @@ $app->post('/program', function () use ($twig) {
 
     $result = array_merge($programArray, $programRequirements, $programZips);
     $program->insertProgram($result);
-    exit;
-});
+    $alert = 'Program was successfully created.';
 
-$app->get('/program/update/:id', function ($id) use ($twig) {
-    echo $twig->render('program.html');
+    $twig->render('program.html', array('alert'=>$alert, 'program' => $_POST));
+    jump('/program');
 });
 
 /** SEARCH **/
@@ -146,21 +149,9 @@ $app->post('/search', function () use ($twig) {
 			$c[] = ($program->getProgramRecord($b['uuid']));
 		}
 	}else{
-		// print_pre(array($_POST['zip']));
-		// die();
 		$c = $program->getProgramsFromRequirements($req_uuids);
 	}
-	
-	
-	// print_pre($c);
-	// print_pre($results);
-	// die();
-	// die();
     echo $twig->render('results.html.twig', array('agencies' => $c));
-
-    // die();
-    // select_q("SELECT uuid FROM hackathon.service_requirement WHERE `name")
-    // echo $twig->render('search.html.twig');
 });
 
 $app->get('/logout', function () use ($twig) {
