@@ -11,6 +11,49 @@ $requirements = array("veteran_any", "sixty_plus");
 $derp["requirements"] = $requirements;
 //insertProgram($derp);
 
+function getProgramsFromZipsAndRequirements($zips, $reqUuids){
+  $reqCsvRequest = converttoCsv($reqUuids);
+  $programs = getProgramsFromZips($zips);
+  $programsMatchingZipUuids = array();
+  foreach($programs as $program){
+    array_push($programsMatchingZipUuids, $program['uuid']);
+  }
+  $programs = getProgramsFromRequirements($reqUuid);
+  $programsMatchingReqUuids = array();
+  foreach($programs as $program){
+    array_push($programsMatchingReqUuids, $program['uuid']);
+  }
+  $programUuidsMatchingBoth = array_intersect($programsMatchingZipUuids, $programsMatchingReqUuids);
+  $ret = array();
+  foreach($programUuidsMatchingBoth as $uuid){
+    array_push($ret, $getProgramRecord($uuid));
+  }
+  return ret;
+}
+
+function getProgramsFromZips($zips){ 
+  $zipCodeUuids = getZipCodeUuids($zips);
+  $csvReq = convertToCsv($zipCodeUuids);
+  $query = "select program_uuid from program_link_zip_codes where zip_code_uuid in ({$csvReq})";
+  $programUuids = select_q($query);
+  $programs = array();
+  foreach($programUuids as $programUuid){
+    $program = getProgramRecord($programUuid);
+    array_push($programs, $program);
+  }
+}
+
+function getProgramsFromRequirements($reqUuids){ 
+  $csvReq = convertToCsv($reqUuids);
+  $query = "select program_uuid from program_link_service_requirement where service_requirement_uuid in ({$csvReq})";
+  $programUuids = select_q($query);
+  $programs = array();
+  foreach($programUuids as $programUuid){
+    $program = getProgramRecord($programUuid);
+    array_push($programs, $program);
+  }
+}
+
 function getProgramsForProvider($providerUuid){
   $query = "select uuid from program where provider_uuid = {$providerUuid}";
   $uuids = select_q($query);

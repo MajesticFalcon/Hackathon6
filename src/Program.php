@@ -117,12 +117,15 @@ class Program
 
     function getProgramRecord($programUuid){
         $program = id_q("select * from program where uuid = {$programUuid}");
+		$provider = id_q("select name, phone from providers where uuid = {$program['provider_uuid']}");
 	if (sizeof($program)) {
 		$zips = $this->getZipsForProgram($programUuid);
 		$requirements = $this->getRequirementsForProgram($programUuid);
+		$ret['uuid'] = $program['uuid'];
+		$ret['last_updated'] = $program['last_updated'];
 		$ret["program_name"] = $program["name"];
-        $ret['uuid'] = $program['uuid'];
-		$ret["provider_uuid"] = 1;
+		$ret["provider_name"] = $provider["name"];
+		$ret["phone_number"] = $provider["phone"];
 		$ret["amount"] = $program["budget"];
 		$ret["zips"] = $zips;
 		$ret["requirements"] = $requirements;
@@ -231,7 +234,7 @@ class Program
             $program = $this->getProgramRecord($uuid['uuid']);
             array_push($programs, $program);
         }
-        foreach ($programs as &$program) {
+        foreach ($programs as $program) {
             $program['link'] = '/program/'.$program['uuid'];
         }
         return $programs;

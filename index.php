@@ -129,29 +129,34 @@ $app->get('/search', function () use ($twig) {
 });
 
 $app->post('/search', function () use ($twig) {
-    // print_pre($_POST);
-    $requires = array();
-	// print_pre($_POST);
-	// die();
-    //This is gross O(n) queries You should be ashamed!
-    foreach ($_POST['requirements'] as $requirement) {
-        // print_pre("SD");
-        array_push($requires, id_q("SELECT uuid FROM hackathon.service_requirement WHERE `ack` = '" . safe_value($requirement) . "'"));
-    }
-	$sql = "";
-	if (count($requires) >= 12){
-		print_pre("ALL");
-		$sql = ("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `budget` <= " . safe_value($_POST['budget']) . "  ");
-	}else{
-		print_pre("some");
-		$sql = ("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `service_requirement_uuid` = '" . safe_value($requirement) . "' AND `budget` <= " . safe_value($_POST['budget']) . "  ");
+	$program = new Hackathon\Program();
+    $req_uuids = array();
+	if(isset($_POST['requirements'])){
+		foreach ($_POST['requirements'] as $requirement) {
+			array_push($req_uuids, id_q("SELECT uuid FROM hackathon.service_requirement WHERE `ack` = '" . safe_value($requirement) . "'")['uuid']);
+		}
 	}
-    // print_pre($requires);
-    // die();
-	print_pre($sql);
-	$a = select_q($sql);
+	$sql = "";
+	$c = array();
+	if (count($req_uuids) >= 12){
+		print_pre("ALL");
+		$sql = ("SELECT Distinct(program.uuid) FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `budget` > 0");
+		$a = select_q($sql);
+		foreach($a as $b){
+			$c[] = ($program->getProgramRecord($b['uuid']));
+		}
+	}else{
+		// print_pre(array($_POST['zip']));
+		// die();
+		$c = $program->getProgramsFromRequirements($req_uuids);
+	}
 	
-    echo $twig->render('results.html.twig', array('agencies' => $a));
+	
+	// print_pre($c);
+	// print_pre($results);
+	// die();
+	// die();
+    echo $twig->render('results.html.twig', array('agencies' => $c));
 
     // die();
     // select_q("SELECT uuid FROM hackathon.service_requirement WHERE `name")
