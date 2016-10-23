@@ -7,7 +7,7 @@
         <label for="existingProgram">Choose from an existing program:</label>
         <select class="form-control" id="existingProgram" name="existingProgram" onchange="if (null !== this.value) location = this.value;">
             <option selected>Choose a program</option>
-            {% for program in programs %}
+            {% for program in user_programs %}
             <option value="{{ program.link }}">{{ program.program_name }}</option>
             {% endfor %}
         </select>
@@ -19,7 +19,7 @@
         <div class="form-group">
             <label for="programName">Program Name</label>
             <input type="text" class="form-control" id="programName" aria-describedby="progName" name="program_name"
-                   placeholder="Enter Program Name">
+                   placeholder="Enter Program Name" value="{{ program.program_name }}">
             <small id="progName" class="form-text text-muted">Use different program names if you offer multiple Homeless
                 Prevention Utility and Rent Assistance Programs.
             </small>
@@ -29,7 +29,7 @@
             <label for="Program1Amount">Prevention Funds Available for this Program</label>
             <div class="input-group">
                 <div class="input-group-addon">$</div>
-                <input type="number" step=".01" min="0.00" class="form-control" name="amount" placeholder="Amount Available">
+                <input type="number" step=".01" min="0.00" class="form-control" name="amount" placeholder="Amount Available" value="{{ program.amount }}">
                 <div class="input-group-addon">.00</div>
             </div>
         </div>
@@ -40,70 +40,70 @@
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="ami">
+                <input type="checkbox" class="form-check-input" name="ami" {% if program.requirements.ami %}checked{% endif %}>
                 HUD Funded (AMI under 30%)
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="veteran_dishonor">
+                <input type="checkbox" class="form-check-input" name="veteran_dishonor" {% if program.requirements.veteran_dishonor %}checked{% endif %}>
                 Veterans - Dishonorable Discharge
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="veteran_any">
+                <input type="checkbox" class="form-check-input" name="veteran_any" {% if program.requirements.veteran_any %}checked{% endif %}>
                 Veterans - Other than Honorable
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="veteran_honorable">
+                <input type="checkbox" class="form-check-input" name="veteran_honorable" {% if program.requirements.veteran_honorable %}checked{% endif %}>
                 Veterans - Honorable
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="family_under_5">
+                <input type="checkbox" class="form-check-input" name="family_under_5" {% if program.requirements.family_under_5 %}checked{% endif %}>
                 Families with Children Under 5
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="family_under_18">
+                <input type="checkbox" class="form-check-input" name="family_under_18" {% if program.requirements.family_under_18 %}checked{% endif %}>
                 Families with Children Under 18
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="sixty_plus">
+                <input type="checkbox" class="form-check-input" name="sixty_plus" {% if program.requirements.sixty_plus %}checked{% endif %}>
                 Senior Citizens 60+
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="youth_16_24">
+                <input type="checkbox" class="form-check-input" name="youth_16_24" {% if program.requirements.youth_16_24 %}checked{% endif %}>
                 Youth Only 16-24
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="private_funds">
+                <input type="checkbox" class="form-check-input" name="private_funds" {% if program.requirements.private_funds %}checked{% endif %}>
                 Private Funding - No Restrictions
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="private_restricted">
+                <input type="checkbox" class="form-check-input" name="private_restricted" {% if program.requirements.private_restricted %}checked{% endif %}>
                 Private Funding - With Restrictions
             </label>
             <textarea class="form-control" name="restrictions_text" rows="3" placeholder="Describe restriction(s)."></textarea>
@@ -113,14 +113,14 @@
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="resident_city">
+                <input type="checkbox" class="form-check-input" name="resident_city" {% if program.requirements.resident_city %}checked{% endif %}>
                 Residents of St. Louis City
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="resident_county">
+                <input type="checkbox" class="form-check-input" name="resident_county" {% if program.requirements.resident_county %}checked{% endif %}>
                 Residents of St. Louis County
             </label>
         </div>

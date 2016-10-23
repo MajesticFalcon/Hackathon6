@@ -88,8 +88,20 @@ $app->get('/program', function () use ($twig) {
     $userId = $_SESSION['user_id'];
     $userArr = $user->fetchUser($userId);
     $programs = $program->getProgramsForProvider($userArr['p_id']);
-    echo $twig->render('program.html', array('programs' => $programs) );
+    echo $twig->render('program.html', array('user_programs' => $programs) );
 });
+
+$app->get('/program/:id', function ($id) use ($twig) {
+    $program = new Hackathon\Program();
+    $record = $program->getProgramRecord($id);
+    $requirements = array();
+    foreach ($record['requirements'] as $requirement) {
+        $requirements[$requirement] = 1;
+    }
+    $record['requirements'] = $requirements;
+    $twig->render('program.html', array('program' => $record));
+});
+
 $app->post('/program', function () use ($twig) {
     $program = new Hackathon\Program($_POST);
     // Joe use this $program
