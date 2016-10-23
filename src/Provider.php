@@ -59,7 +59,12 @@ class Provider
         action_q($sql);
     }
 
-    function updateProvider($arr, $id) {
-         action_q("UPDATE hackathon.providers SET `name` = '".safe_value($arr['name'])."', `phone` = '".safe_value($arr['phone'])."', `poc` = '".safe_value($arr['poc'])."', `address` = '".safe_value($arr['address'])."', `city` = '".safe_value($arr['city'])."', `state` = '".safe_value($arr['state'])."', `zip` = '".safe_value($arr['zip'])."', `coc` = '".safe_value($arr['coc'])."' WHERE id = '".$id."''" );
+	//Im swapping arr and ID. 
+    function updateProvider($id,$arr) {
+         // print_pre("UPDATE hackathon.providers SET `name` = '".safe_value($arr['name'])."', `phone` = '".safe_value($arr['phone'])."', `poc` = '".safe_value($arr['poc'])."', `address` = '".safe_value($arr['address'])."', `city` = '".safe_value($arr['city'])."', `state` = '".safe_value($arr['state'])."', `zip` = '".safe_value($arr['zip'])."', `coc` = '".safe_value($arr['coc'])."' WHERE uuid = '".$id."''" );
+        // die();
+		// action_q("UPDATE hackathon.providers SET `name` = '".safe_value($arr['name'])."', `phone` = '".safe_value($arr['phone'])."', `poc` = '".safe_value($arr['poc'])."', `address` = '".safe_value($arr['address'])."', `city` = '".safe_value($arr['city'])."', `state` = '".safe_value($arr['state'])."', `zip` = '".safe_value($arr['zip'])."', `coc` = '".safe_value($arr['coc'])."' WHERE uuid = '".$id."''" );
+         // print_pre("UPDATE hackathon.providers SET `name` = '".safe_value($arr['name'])."', `phone` = '".safe_value($arr['phone'])."', `poc` = '".safe_value($arr['poc'])."', `address` = '".safe_value($arr['address'])."', `city` = '".safe_value($arr['city'])."', `state` = '".safe_value($arr['state'])."', `zip` = '".safe_value($arr['zip'])."', `coc` = '".safe_value($arr['coc'])."' WHERE uuid = ".$id."" );
+         action_q("UPDATE hackathon.providers SET `name` = '".safe_value($arr['name'])."', `phone` = '".safe_value($arr['phone'])."', `poc` = '".safe_value($arr['poc'])."', `address` = '".safe_value($arr['address'])."', `city` = '".safe_value($arr['city'])."', `state` = '".safe_value($arr['state'])."', `zip` = '".safe_value($arr['zip'])."', `coc` = '".safe_value($arr['coc'])."' WHERE uuid = ".$id."" );
     }
 }

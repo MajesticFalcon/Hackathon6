@@ -73,11 +73,11 @@
 			$_POST['coc'] = 1;
 		}
 		if (!$provider->verifyProvider($_POST)) {
-			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
+			echo $twig->render('ProfileEdit.html.twig', array('profile' => $_POST, 'errors' => $provider->getErrors()));
 		} else {
 			$provider->updateProvider($id, $_POST);
 			$alert = 'Your provider has been successfully updated.';
-			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'alert' => $alert));
+			echo $twig->render('ProfileEdit.html.twig', array('profile' => $_POST, 'alert' => $alert));
 		}
 	});
 
