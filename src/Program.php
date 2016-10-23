@@ -74,7 +74,7 @@ class Program
             $array['private_restricted'] = 1;
         }
         if (!isset($array['restrictions_text'])) {
-            $array['private_restricted'] = '';
+            $array['restrictions_text'] = '';
         }
         if (!isset($array['resident_city'])) {
             $array['resident_city'] = 0;
