@@ -111,7 +111,7 @@ $app->get('/search', function () use ($twig) {
     //select col gets a reg array of unamed values
     $zip_codes = select_col("select zip from zip_code", "zip");
     foreach ($zip_codes as $zip_code) {
-        print_pre($zip_code);
+        // print_pre($zip_code);
     }
     echo $twig->render('search.html.twig', array('zip_codes' => $zip_codes));
 });
@@ -119,20 +119,31 @@ $app->get('/search', function () use ($twig) {
 $app->post('/search', function () use ($twig) {
     // print_pre($_POST);
     $requires = array();
+	// print_pre($_POST);
+	// die();
     //This is gross O(n) queries You should be ashamed!
     foreach ($_POST['requirements'] as $requirement) {
         // print_pre("SD");
         array_push($requires, id_q("SELECT uuid FROM hackathon.service_requirement WHERE `ack` = '" . safe_value($requirement) . "'"));
     }
+	$sql = "";
+	if (count($requires) >= 12){
+		print_pre("ALL");
+		$sql = ("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `budget` <= " . safe_value($_POST['budget']) . "  ");
+	}else{
+		print_pre("some");
+		$sql = ("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `service_requirement_uuid` = '" . safe_value($requirement) . "' AND `budget` <= " . safe_value($_POST['budget']) . "  ");
+	}
     // print_pre($requires);
     // die();
-    $a = select_q("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `service_requirement_uuid` = '" . safe_value($requirement) . "' AND `budget` <= " . safe_value($_POST['budget']) . "  ");
-    // print_pre($a);
+	print_pre($sql);
+	$a = select_q($sql);
+	
     echo $twig->render('results.html.twig', array('agencies' => $a));
 
-    die();
+    // die();
     // select_q("SELECT uuid FROM hackathon.service_requirement WHERE `name")
-    echo $twig->render('search.html.twig');
+    // echo $twig->render('search.html.twig');
 });
 
 $app->get('/logout', function () use ($twig) {
