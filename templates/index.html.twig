@@ -17,15 +17,16 @@
         {% endif %}
         <h2 class="form-signin-heading">Log in for access.</h2>
         <label for="inputEmail" class="sr-only">Email address</label>
-        <input name="username" type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input name="username" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <input type="submit" name="Action" value="Login" class="btn btn-lg btn-primary btn-block"></input>
-        <br />
+		<!-- I removed the required fields !-->
+        <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password">
         <!-- This is beyond our current scope !-->
         <!-- <a href="/forgot.html">Forgot Password?</a> !-->
-    </form>
-
+        <input type="submit" name="Action" value="Login" class="btn btn-lg btn-primary btn-block"></input>
+        <br />
+        <input type="submit" name="Action" value="Register" class="btn btn-lg btn-primary btn-block"></input>
+	</form>
 
 
 </div>

@@ -88,7 +88,6 @@
 		$programRequirements = $program->getProgramRequirements();
 		$programZips = $program->getZipcodes();
 
-        var_dump($programArray, $programRequirements, $programZips);
 		$result = array_merge($programArray, $programRequirements, $programZips);
         exit;
     });
