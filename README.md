@@ -24,6 +24,15 @@ $ composer install
     }
 }
 ```
+### Credits:
+    - Ben Walley (https://github.com/benwalley
+    - Schylar Utley (https://github.com/MajesticFalcon)
+    - Joseph Kurtz (https://github.com/joemie)
+    - Jennifer Kret
+    - Craig Anthony Nicholas
+    - Tommy Ferguson (https://github.com/atfergus)
+    - Eva Tucker
+    - Martha Valenta (https://github.com/humandmt)
 
 ### Contributing:
 
