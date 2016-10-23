@@ -7,7 +7,6 @@ function print_pre($val){
 }
 
 function safe_value($val){
-	//I cant get this damn mysqli escape shit to work
 	if (is_null($val)){
 		$val = 0;
 	}

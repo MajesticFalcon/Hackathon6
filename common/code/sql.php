@@ -21,7 +21,6 @@ function check_sql_connection(){
 function action_q($sql){
 	global $sql_connection;
 	check_sql_connection();
-	//This error handling is shit.. 
 	mysqli_query($sql_connection, $sql);
 	$id = mysqli_insert_id($sql_connection);
 	return $id;
