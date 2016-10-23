@@ -21,6 +21,9 @@
     $app->get('/program', function () use ($twig) {
         echo $twig->render('program.html');
     });
+    $app->post('/program', function() use ($twig) {
+        var_dump($_POST);
+    });
 	$app->get('/program/update/:id', function ($id) use ($twig) {
 		echo $twig->render('program.html');
     });
