@@ -119,8 +119,9 @@
 				jump("profile/".$result['id']);
 			}
 		}else{
+			$error = 'Your username or password does not match the information we have on file.';
 			print_pre("Incorrect Login");
-			echo $twig->render('index.html.twig', array());
+			echo $twig->render('index.html.twig', array('error' => $error));
 		}
 		// print_pre(safe_value('s'));
 	}

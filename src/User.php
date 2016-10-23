@@ -46,10 +46,9 @@ class User {
     }
 
     function insertUser($user) {
-        $crypt_pass = crypt(safe_value($user['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
+        $p = crypt(safe_value($user['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
         $u = safe_value($user['username']);
-        $p = safe_value($user['password']);
-        $sql="INSERT INTO hackathon.users (`username`, `password`) VALUES ($u, $p)";
+        $sql="INSERT INTO hackathon.users (`username`, `password`) VALUES ('$u','$p')";
         action_q($sql);
     }
 }
