@@ -93,6 +93,7 @@
 		$programZips = $program->getZipcodes();
 
 		$result = array_merge($programArray, $programRequirements, $programZips);
+		$program->insertProgram($result);
         exit;
     });
 
