@@ -24,6 +24,10 @@
 	$app->get('/program/update/:id', function ($id) use ($twig) {
 		echo $twig->render('program.html');
     });
+	$app->post('/program', function() use ($twig) {
+		var_dump($_POST);
+	});
+
 	$app->post('/profile/:id', function ($id) use ($twig) {
 		print_pre("Information Entered Completely");
 		action_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."'" );
