@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+<div class="container">
+    <div class="col-xs-10 col-xs-push-1">
+        <h1>These Programs Match Your Search:</h1>
+        <table class="table table-reflow">
+            <thead>
+            <tr>
+                <th>Program Name</th>
+                <th>Organization</th>
+                <th>Contact</th>
+                <th>Phone</th>
+                <th>Funds Available</th>
+                <th>Last Updated</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            {% for agency in agencies %}
+                <tr>
+                    <td>{{ agency.name }}</td>
+                    <td>{{ agency.program_name }}</td>
+                    <td>{{ agency.manager }}</td>
+                    <td>{{ agency.phone_number }}</td>
+                    <td align="right">{{ agency.amount }}</td>
+                    <td align="right">{{ agency.amount_last_updated }}</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td>HUD Homeless Prevention Assistance</td>
+                <td>St. Patrick's Center</td>
+                <td>Patrick Homes</td>
+                <td>314-555-5555</td>
+                <td align="right">$1,000.00</td>
+                <td align="right">10/16/2016</td>
+            </tr>
+            <tr>
+                <td>United Way Disaster Recovery Grant</td>
+                <td>St. Patrick's Center</td>
+                <td>Patrick Homes</td>
+                <td>314-555-5555</td>
+                <td align="right">$1,000.00</td>
+                <td align="right">10/16/2016</td>
+            </tr>
+            <tr>
+                <td>St. Vincint DePaul Society Stay Home Fund</td>
+                <td>St. Peter & Paul</td>
+                <td>Larry House</td>
+                <td>314-555-5555</td>
+                <td align="right">$1,000.00</td>
+                <td align="right">10/16/2016</td>
+            </tr>
+            </tbody>
+        </table>
+        <br/>
+        <button type="submit" class="btn btn-primary"> < Return to Search</button>
+    </div>
+</div><!-- /.container -->
+{% endblock %}

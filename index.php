@@ -83,6 +83,8 @@
 		// die();
 		$a = select_q("SELECT * FROM program join program_link_service_requirement on (program.uuid = program_link_service_requirement.program_uuid) join service_requirement on (service_requirement_uuid = program_link_service_requirement.service_requirement_uuid) WHERE `service_requirement_uuid` = '".safe_value($requirement)."' AND `budget` <= ".safe_value($_POST['budget'])."  ");
 		print_pre($a);
+		echo $twig->render('results.html.twig', array('agencies' => $a));
+
 		die();
 		// select_q("SELECT uuid FROM hackathon.service_requirement WHERE `name")
         echo $twig->render('search.html.twig');
