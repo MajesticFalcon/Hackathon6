@@ -51,6 +51,28 @@
         jump("profile/".$id);
     });
 
+	$app->post('/provider', function () {
+		$provider = new Hackathon\Provider();
+		if ($provider->verifyProvider($_POST)) {
+			$provider->insertProvider($_POST);
+			jump('program');
+		} else {
+			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
+		}
+	});
+
+	$app->post('/provider/:id', function ($id) {
+		// TODO if logged in user owns provider
+		$provider = new Hackathon\Provider();
+		if ($provider->verifyProvider($_POST)) {
+			$provider->updateProvider($id, $_POST);
+			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'errors' => $provider->getErrors()));
+		} else {
+			$alert = 'Your provider has been successfully updated.';
+			echo $twig->render('ProfileEdit.html.twig', array('provider' => $_POST, 'alert' => $alert));
+		}
+	});
+
 	/** PROGRAM **/
     $app->get('/program', function () use ($twig) {
         echo $twig->render('program.html');
