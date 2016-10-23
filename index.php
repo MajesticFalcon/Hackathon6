@@ -108,7 +108,10 @@ $app->get('/program/:id', function ($id) use ($twig) {
 
 $app->post('/program', function () use ($twig) {
     $program = new Hackathon\Program($_POST);
-    // Joe use this $program
+    $user = new Hackathon\User();
+    $userId = $_SESSION['user_id'];
+    $userArr = $user->fetchUser($userId);
+
     $programArray = $program->getProgram();
     $programRequirements = $program->getProgramRequirements();
     $programZips = $program->getZipcodes();
@@ -116,6 +119,7 @@ $app->post('/program', function () use ($twig) {
     $result = array_merge($programArray, $programRequirements, $programZips);
     $program->insertProgram($result);
     $alert = 'Program was successfully created.';
+    $program->insertProgram($result, $userArr['p_id']);
 
     $twig->render('program.html', array('alert'=>$alert, 'program' => $_POST));
     jump('/program');
