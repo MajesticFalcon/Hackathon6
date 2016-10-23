@@ -65,7 +65,7 @@
 	$app->post('/profile/:id', function ($id) use($twig) {
 		// TODO if logged in user owns provider
 		$provider = new Hackathon\Provider();
-		if (is_null($_POST['coc'])){
+		if (!isset($_POST['coc'])) {
 			$_POST['coc'] = 1;
 		}
 		if ($provider->verifyProvider($_POST)) {
