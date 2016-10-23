@@ -5,6 +5,5 @@
 	require_once("code/style.php");
 	require_once("code/misc.php");
 	require_once("code/user.php");
-	require_once('test/pureImagination.php');
-	
+
 ?>
