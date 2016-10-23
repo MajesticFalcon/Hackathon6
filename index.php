@@ -125,7 +125,7 @@
         jump('');
     });
 
-	$app->post('/', function () {
+	$app->post('/', function () use ($twig) {
 		if($_POST['Action'] == 'Register'){
 		  jump("register");
 		}

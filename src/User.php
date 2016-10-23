@@ -48,7 +48,13 @@ class User {
     function insertUser($user) {
         $p = crypt(safe_value($user['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
         $u = safe_value($user['username']);
-        $sql="INSERT INTO hackathon.users (`username`, `password`) VALUES ('$u','$p')";
-        action_q($sql);
+		$old_p_id = id_q("SELECT MAX(p_id) as p_id from hackathon.users");
+		print_pre($old_p_id);
+		$old_p_id['p_id']++;
+        $user_sql = "INSERT INTO hackathon.users (`p_id`, `username`, `password`) VALUES ('".$old_p_id['p_id']."', '$u','$p')";
+        $provider_sql = "INSERT INTO hackathon.providers (`uuid`) VALUES (".$old_p_id['p_id'].")";
+		action_q($user_sql);
+		action_q($provider_sql);
+		return $old_p_id['p_id'];
     }
 }
