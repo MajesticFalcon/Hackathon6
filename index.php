@@ -40,7 +40,7 @@
         if ($user->verifyUser($_POST)) {
 			$_SESSION['logged_in'] = true;
             $p_id = $user->insertUser($user->getUser());
-			jump('profile/'.$p_id);
+			jump("profile/".$result['p_id']);
         } else {
 			echo $twig->render('register.html.twig', array('user' => $_POST, 'errors' => $user->getErrors()));
 		}
