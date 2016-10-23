@@ -24,13 +24,23 @@
 	$app->get('/program/update/:id', function ($id) use ($twig) {
 		echo $twig->render('program.html');
     });
-	$app->post('/program', function() use ($twig) {
-		var_dump($_POST);
-	});
-
+	$app->get('/search', function () use ($twig) {
+        echo $twig->render('search.html.twig');
+    });
+	$app->post('/search', function () use ($twig) {
+		print_pre($_POST);
+		die();
+        echo $twig->render('search.html.twig');
+    });
 	$app->post('/profile/:id', function ($id) use ($twig) {
+		// print_pre($_POST);
+		// die();
 		print_pre("Information Entered Completely");
-		action_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."'" );
+		if (is_null($_POST['coc'])){
+			$_POST['coc'] = 1;
+		}
+		// action_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."', `coc` = '".safe_value($_POST['coc'])."'" );
+		// print_pre($_POST);
 		jump("profile/".$id);
     });
 	
