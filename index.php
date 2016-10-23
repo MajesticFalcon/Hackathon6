@@ -5,6 +5,7 @@
 
     $loader = new Twig_Loader_Filesystem('templates/');
     $twig = new Twig_Environment($loader);
+    $twig->addGlobal('session', $_SESSION);
 
 	require_once($_SERVER['DOCUMENT_ROOT']."/common/include.php");
 
@@ -134,6 +135,7 @@
 		$result = id_q("SELECT * from hackathon.users WHERE `username` = '".safe_value($_POST['username'])."' and `password` = '".$crypted_pass."'");
 		if (count($result) > 0){
 			$_SESSION['logged_in'] = true;
+			$_SESSION['user_id'] = $result['id'];
 			$logged_in_user = $_POST['username'];
 			print_pre("Your logged in as ".$logged_in_user."");
 			if ($result['registered'] == 1){
