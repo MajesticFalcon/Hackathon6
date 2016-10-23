@@ -30,6 +30,10 @@
 	});
 
 	/** PROFILE */
+    $app->get('/profile', function () use ($twig) {
+        echo $twig->render('ProfileEdit.html.twig');
+    });
+
 	$app->get('/profile/:id', function ($id) use ($twig) {
 		$profile = get_profile($id);
         echo $twig->render('ProfileEdit.html.twig', array('profile' => $profile));
@@ -94,6 +98,25 @@
         jump('');
     });
 
+	$app->post('/', function () {
+		//Im going to let the designers worry about if the fields have been entered
+		$crypted_pass = "";
+		$crypted_pass = crypt(safe_value($_POST['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
+		$result = id_q("SELECT * from hackathon.users WHERE `username` = '".safe_value($_POST['username'])."' and `password` = '".$crypted_pass."'");
+		if (count($result) > 0){
+			$logged_in_user = $_POST['username'];
+			print_pre("Your logged in as ".$logged_in_user."");
+			if ($result['registered'] == 1){
+				jump("search");
+			}else{
+				jump("profile");
+			}
+		}else{
+			$error = 'Your username or password does not match the information we have on file.';
+			echo $twig->render('index.html.twig', array('error' => $error));
+		}
+	});
+
 	$app->get('/search', function () use ($twig) {
         echo $twig->render('search.html.twig', array());
     });
@@ -104,26 +127,6 @@
 
     // Run application
     $app->run();
-
-	if ($_POST['Action'] == 'Login'){
-		//Im going to let the designers worry about if the fields have been entered
-		$crypted_pass = "";
-		$crypted_pass = crypt(safe_value($_POST['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
-		$result = id_q("SELECT * from hackathon.users WHERE `username` = '".safe_value($_POST['username'])."' and `password` = '".$crypted_pass."'");
-		if (count($result) > 0){
-			$logged_in_user = $_POST['username'];
-			print_pre("Your logged in as ".$logged_in_user."");
-			if ($result['registered'] == 1){
-				jump("org/search.php");
-			}else{
-				jump("profile/".$result['id']);
-			}
-		}else{
-			$error = 'Your username or password does not match the information we have on file.';
-			echo $twig->render('index.html.twig', array('error' => $error));
-		}
-		// print_pre(safe_value('s'));
-	}
 ?>
 
 
