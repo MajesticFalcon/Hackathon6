@@ -3,7 +3,10 @@
 <div class="container" style="background-color: #eee">
 
     <div class="col-xs-10 col-xs-push-1">
-        <select class="form-control" onchange="location = this.value;">
+        <br>
+        <label for="existingProgram">Choose from an existing program:</label>
+        <select class="form-control" id="existingProgram" name="existingProgram" onchange="if (null !== this.value) location = this.value;">
+            <option selected>Choose a program</option>
             {% for program in programs %}
             <option value="{{ program.link }}">{{ program.program_name }}</option>
             {% endfor %}

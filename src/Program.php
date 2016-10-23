@@ -121,6 +121,7 @@ class Program
 		$zips = $this->getZipsForProgram($programUuid);
 		$requirements = $this->getRequirementsForProgram($programUuid);
 		$ret["program_name"] = $program["name"];
+        $ret['uuid'] = $program['uuid'];
 		$ret["provider_uuid"] = 1;
 		$ret["amount"] = $program["budget"];
 		$ret["zips"] = $zips;
