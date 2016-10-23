@@ -167,7 +167,7 @@ $app->post('/', function () use ($twig) {
         if ($result['registered'] == 1) {
             jump("search");
         } else {
-            jump("profile");
+            jump("profile/".$result['p_id']);
         }
     } else {
         $error = 'Your username or password does not match the information we have on file.';

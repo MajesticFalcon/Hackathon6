@@ -230,6 +230,9 @@ class Program
             $program = $this->getProgramRecord($uuid['uuid']);
             array_push($programs, $program);
         }
+        foreach ($programs as &$program) {
+            $program['link'] = '/program/'.$program['uuid'];
+        }
         return $programs;
     }
 }
