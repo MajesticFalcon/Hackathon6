@@ -14,21 +14,40 @@
     $app->get('/', function () use ($twig, $profile) {
 		echo $twig->render('index.html.twig', array());
     });
+
+	/** REGISTER **/
 	$app->get('/register', function () use ($twig) {
 		echo $twig->render('register.html.twig', array());
 	});
 	$app->post('/register', function () use ($twig) {
         $user = new Hackathon\User($_POST);
         if ($user->verifyUser($_POST)) {
-            jump('program');
+            $user->insertUser($user->getUser());
+			jump('program');
         } else {
 			echo $twig->render('register.html.twig', array('user' => $_POST, 'errors' => $user->getErrors()));
 		}
 	});
+
+	/** PROFILE */
 	$app->get('/profile/:id', function ($id) use ($twig) {
 		$profile = get_profile($id);
         echo $twig->render('ProfileEdit.html.twig', array('profile' => $profile));
     });
+
+    $app->post('/profile/:id', function ($id) use ($twig) {
+        // print_pre($_POST);
+        // die();
+        print_pre("Information Entered Completely");
+        if (is_null($_POST['coc'])){
+            $_POST['coc'] = 1;
+        }
+        // action_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."', `coc` = '".safe_value($_POST['coc'])."'" );
+        // print_pre($_POST);
+        jump("profile/".$id);
+    });
+
+	/** PROGRAM **/
     $app->get('/program', function () use ($twig) {
         echo $twig->render('program.html');
     });
@@ -42,15 +61,16 @@
         var_dump($programArray, $programRequirements, $programZips);
         exit;
     });
+
 	$app->get('/program/update/:id', function ($id) use ($twig) {
 		echo $twig->render('program.html');
     });
+
+	/** SEARCH **/
 	$app->get('/search', function () use ($twig) {
         echo $twig->render('search.html.twig');
     });
-    $app->get('/logout', function () use ($twig) {
-        jump('');
-    });
+
 	$app->post('/search', function () use ($twig) {
 		print_pre($_POST);
 		$requires = array();
@@ -67,31 +87,21 @@
 		// select_q("SELECT uuid FROM hackathon.service_requirement WHERE `name")
         echo $twig->render('search.html.twig');
     });
-	$app->post('/profile/:id', function ($id) use ($twig) {
-		// print_pre($_POST);
-		// die();
-		print_pre("Information Entered Completely");
-		if (is_null($_POST['coc'])){
-			$_POST['coc'] = 1;
-		}
-		// action_q("UPDATE hackathon.providers SET `name` = '".safe_value($_POST['name'])."', `phone` = '".safe_value($_POST['phone'])."', `poc` = '".safe_value($_POST['poc'])."', `address` = '".safe_value($_POST['address'])."', `city` = '".safe_value($_POST['city'])."', `state` = '".safe_value($_POST['state'])."', `zip` = '".safe_value($_POST['zip'])."', `coc` = '".safe_value($_POST['coc'])."'" );
-		// print_pre($_POST);
-		jump("profile/".$id);
+
+    $app->get('/logout', function () use ($twig) {
+        jump('');
     });
-	
+
 	$app->get('/search', function () use ($twig) {
         echo $twig->render('search.html.twig', array());
     });
+
 	$app->post('/', function () use ($twig) {
        // jump("/");
     });
 
     // Run application
     $app->run();
-
-
-	// print_pre($_POST);
-
 
 	if ($_POST['Action'] == 'Login'){
 		//Im going to let the designers worry about if the fields have been entered

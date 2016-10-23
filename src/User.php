@@ -14,6 +14,10 @@ class User {
         return implode('', $this->errors);
     }
 
+    function getUser() {
+        return $this->user;
+    }
+
     function verifyUser($arr) {
         if (!isset($arr['username'])) {
             $this->errors[] = 'Username is required.';
@@ -31,6 +35,7 @@ class User {
             $this->errors[] = 'Your password must be 8 or more characters.';
         }
         if (empty($this->errors)) {
+            $this->user = $arr;
             return true;
         }
         return false;
@@ -43,10 +48,8 @@ class User {
     function insertUser($user) {
         $crypt_pass = crypt(safe_value($user['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
         $u = safe_value($user['username']);
-        $p = safe_value($u['password']);
-        $sql=<<<SQL
-INSERT INTO hackathon.users (`username`, `password`) VALUES ({$u}, {$p});
-SQL;
+        $p = safe_value($user['password']);
+        $sql="INSERT INTO hackathon.users (`username`, `password`) VALUES ($u, $p)";
         action_q($sql);
     }
 }
