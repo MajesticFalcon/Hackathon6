@@ -18,8 +18,12 @@
 
                 <div class="form-group">
                     <label for="ZipCode">Zip Code</label>
-                    <input name="zip" type="text" class="form-control" id="orgName" aria-describedby="ZipCode"
+                    <select name="zip" type="text" class="form-control" id="orgName" aria-describedby="ZipCode"
                            placeholder="Zip Code">
+						{% for zip_code in zip_codes %}
+							<option value="{{zip_code}}"></option>
+						{% endfor %}
+					</select>
                 </div>
 
                 <div class="form-group">

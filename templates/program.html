@@ -2,6 +2,14 @@
 {% block content %}
 <div class="container" style="background-color: #eee">
 
+    <div class="col-xs-10 col-xs-push-1">
+        <select class="form-control" onchange="location = this.value;">
+            {% for program in programs %}
+            <option value="{{ program.link }}"></option>
+            {% endfor %}
+        </select>
+    </div>
+
     <form class="col-xs-10 col-xs-push-1" method="POST" action="/program">
 
         <!-- Begin Program Information -->

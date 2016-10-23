@@ -38,6 +38,19 @@ function select_q($sql){
 	return $results;
 }
 
+function select_col($sql, $col){
+	global $sql_connection;
+	check_sql_connection();
+	$results = array();
+	$query = mysqli_query($sql_connection, $sql);
+	while($mysql_query_rows = mysqli_fetch_assoc($query)){
+		// print_pre($mysql_query_rows);
+		$results[] = $mysql_query_rows[$col];
+	}
+	return $results;
+}
+
+
 function id_q($sql){
 	global $sql_connection;
 	check_sql_connection();

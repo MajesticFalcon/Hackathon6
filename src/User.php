@@ -1,23 +1,28 @@
 <?php
 namespace Hackathon;
 
-class User {
+class User
+{
     private $user;
     private $errors;
 
-    function __construct($arr = array()) {
+    function __construct($arr = array())
+    {
         $this->errors = array();
     }
 
-    function getErrors() {
+    function getErrors()
+    {
         return implode('', $this->errors);
     }
 
-    function getUser() {
+    function getUser()
+    {
         return $this->user;
     }
 
-    function verifyUser($arr) {
+    function verifyUser($arr)
+    {
         if (!isset($arr['username'])) {
             $this->errors[] = 'Username is required.';
         }
@@ -40,20 +45,29 @@ class User {
         return false;
     }
 
-    function hasErrors() {
+    function hasErrors()
+    {
         return sizeof($this->errors);
     }
 
-    function insertUser($user) {
-        $p = crypt(safe_value($user['password']),'$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
+    function insertUser($user)
+    {
+        $p = crypt(safe_value($user['password']), '$2a$09$WHYAMISTORINGTHISSALTPLAINLYINSOURCECODE?$');
         $u = safe_value($user['username']);
-		$old_p_id = id_q("SELECT MAX(p_id) as p_id from hackathon.users");
-		print_pre($old_p_id);
-		$old_p_id['p_id']++;
-        $user_sql = "INSERT INTO hackathon.users (`p_id`, `username`, `password`) VALUES ('".$old_p_id['p_id']."', '$u','$p')";
-        $provider_sql = "INSERT INTO hackathon.providers (`uuid`) VALUES (".$old_p_id['p_id'].")";
-		action_q($user_sql);
-		action_q($provider_sql);
-		return $old_p_id['p_id'];
+        $old_p_id = id_q("SELECT MAX(p_id) as p_id from hackathon.users");
+        print_pre($old_p_id);
+        $old_p_id['p_id']++;
+        $user_sql = "INSERT INTO hackathon.users (`p_id`, `username`, `password`) VALUES ('" . $old_p_id['p_id'] . "', '$u','$p')";
+        $provider_sql = "INSERT INTO hackathon.providers (`uuid`) VALUES (" . $old_p_id['p_id'] . ")";
+        action_q($user_sql);
+        action_q($provider_sql);
+        return $old_p_id['p_id'];
+    }
+
+    function fetchUser($userId)
+    {
+        $sql = "SELECT * FROM hackathon.users WHERE id='$userId'";
+        $result = id_q($sql);
+        return $result;
     }
 }

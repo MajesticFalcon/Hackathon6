@@ -116,15 +116,20 @@ class Program
 
 
     function getProgramRecord($programUuid){
-        $program = select_q("select * from program where uuid = {$programUuid}");
-        $zips = $this->getZipsForProgram($programUuid);
-        $requirements = $this->getRequirementsForProgram($programUuid);
-        $ret["program_name"] = $program["name"];
-        $ret["provider_uuid"] = 1;
-        $ret["amount"] = $program["budget"];
-        $ret["zips"] = $zips;
-        $ret["requirements"] = $requirements;
-        return $ret;
+        $program = id_q("select * from program where uuid = {$programUuid}");
+	if (sizeof($program)) {
+		$zips = $this->getZipsForProgram($programUuid);
+		$requirements = $this->getRequirementsForProgram($programUuid);
+		$ret["program_name"] = $program["name"];
+		$ret["provider_uuid"] = 1;
+		$ret["amount"] = $program["budget"];
+		$ret["zips"] = $zips;
+		$ret["requirements"] = $requirements;
+		return $ret;
+	}
+	else {
+		return array();
+	}
     }
 
     function insertProgram($programArr){
@@ -215,5 +220,16 @@ class Program
         else{
             return $results;
         }
+    }
+
+    function getProgramsForProvider($providerUuid){
+        $query = "select uuid from program where provider_uuid = {$providerUuid}";
+        $uuids = select_q($query);
+        $programs = array();
+        foreach($uuids as $uuid){
+            $program = $this->getProgramRecord($uuid['uuid']);
+            array_push($programs, $program);
+        }
+        return $programs;
     }
 }
