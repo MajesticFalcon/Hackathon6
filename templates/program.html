@@ -2,12 +2,12 @@
 {% block content %}
 <div class="container" style="background-color: #eee">
 
-    <form class="col-xs-10 col-xs-push-1">
+    <form class="col-xs-10 col-xs-push-1" method="POST" action="/program">
 
         <!-- Begin Program Information -->
         <div class="form-group">
             <label for="programName">Program Name</label>
-            <input type="email" class="form-control" id="programName" aria-describedby="progName" name="p_nam"
+            <input type="email" class="form-control" id="programName" aria-describedby="progName" name="program_name"
                    placeholder="Enter Program Name">
             <small id="progName" class="form-text text-muted">Use different program names if you offer multiple Homeless
                 Prevention Utility and Rent Assistance Programs.
@@ -36,80 +36,80 @@
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="va_dd">
+                <input type="checkbox" class="form-check-input" name="veteran_dishonor">
                 Veterans - Dishonorable Discharge
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="va_o">
+                <input type="checkbox" class="form-check-input" name="veteran_other">
                 Veterans - Other than Honorable
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="va_h">
+                <input type="checkbox" class="form-check-input" name="veteran_honorable">
                 Veterans - Honorable
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="fam_5">
+                <input type="checkbox" class="form-check-input" name="family_under_5">
                 Families with Children Under 5
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="fam_18">
+                <input type="checkbox" class="form-check-input" name="family_under_18">
                 Families with Children Under 18
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="60_plus">
+                <input type="checkbox" class="form-check-input" name="sixty_plys">
                 Senior Citizens 60+
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="y_1624">
+                <input type="checkbox" class="form-check-input" name="youth_16_24">
                 Youth Only 16-24
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="pri">
+                <input type="checkbox" class="form-check-input" name="private_funds">
                 Private Funding - No Restrictions
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="pri_r">
+                <input type="checkbox" class="form-check-input" name="private_restricted">
                 Private Funding - With Restrictions
             </label>
-            <textarea class="form-control" name="rstrct" rows="3" placeholder="Describe restriction(s)."></textarea>
+            <textarea class="form-control" name="restrictions_text" rows="3" placeholder="Describe restriction(s)."></textarea>
         </div>
         <br/>
 
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="r_city">
+                <input type="checkbox" class="form-check-input" name="resident_city">
                 Residents of St. Louis City
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="r_cnty">
+                <input type="checkbox" class="form-check-input" name="resident_county">
                 Residents of St. Louis County
             </label>
         </div>
@@ -128,7 +128,7 @@
 
                 <div class="form-check">
                     <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input" name="zipCodes[]" value"63005 ">
+                        <input type="checkbox" class="form-check-input" name="zipCodes[]" value="63005">
                         63005 (Chesterfield)
                     </label>
                 </div>
@@ -1153,12 +1153,10 @@
         <br/>
         <button type="submit" class="btn btn-primary">Save This Prevention Program</button>
 
-    </formi>
+    </form>
 </div><!-- /.container -->
 
 
-</div>
-<!-- /container -->
 <!-- Bootstrap core JavaScript
 
 ================================================== -->
