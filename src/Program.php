@@ -117,8 +117,8 @@ class Program
 
     function getProgramRecord($programUuid){
         $program = select_q("select * from program where uuid = {$programUuid}");
-        $zips = getZipsForProgram($programUuid);
-        $requirements = getRequirementsForProgram($programUuid);
+        $zips = $this->getZipsForProgram($programUuid);
+        $requirements = $this->getRequirementsForProgram($programUuid);
         $ret["program_name"] = $program["name"];
         $ret["provider_uuid"] = 1;
         $ret["amount"] = $program["budget"];
@@ -131,12 +131,12 @@ class Program
         $providerUuid = 1;
         $name = $programArr["program_name"];
         $budget = $programArr["amount"];
-        $zipCodeUuids = getZipCodeUuids($programArr["zipCodes"]);
-        $reqUuids = getRequirementUuids($programArr["requirements"]);
+        $zipCodeUuids = $this->getZipCodeUuids($programArr["zipCodes"]);
+        $reqUuids = $this->getRequirementUuids($programArr["requirements"]);
         $programQuery = "insert into program (provider_uuid, name, budget) values ({$providerUuid}, '{$name}', {$budget})";
         $programUuid = action_q($programQuery);
-        insertZipsForProgram($programUuid, $zipCodeUuids);
-        insertRequirementsForProgram($programUuid, $reqUuids);
+        $this->insertZipsForProgram($programUuid, $zipCodeUuids);
+        $this->insertRequirementsForProgram($programUuid, $reqUuids);
     }
 
     function insertZipsForProgram($programUuid, $zipUuids){
@@ -173,13 +173,13 @@ class Program
     }
 
     function getZipCodeUuids($zips){
-        $zipCsv = convertToCsv($zips);
+        $zipCsv = $this->convertToCsv($zips);
         $query = "select uuid from zip_code where zip in ({$zipCsv})";
         return select_q($query);
     }
 
     function getRequirementUuids($requirementAcks){
-        $reqAckCsv = convertToCsv($requirementAcks);
+        $reqAckCsv = $this->convertToCsv($requirementAcks);
         $query = "select uuid from service_requirement where ack in ({$reqAckCsv})";
         return select_q($query);
     }
