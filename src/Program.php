@@ -239,4 +239,22 @@ class Program
         }
         return $programs;
     }
+
+    function getProgramsFromRequirements($reqUuids){
+        if(empty($reqUuids)){
+            return array();
+        }
+        $csvReq = $this->convertToCsv($reqUuids);
+        $query = "select program_uuid from program_link_service_requirement where service_requirement_uuid in ({$csvReq})";
+        $programUuids = select_q($query);
+        if(empty($programUuids)){
+            return array();
+        }
+        $programs = array();
+        foreach($programUuids as $programUuid){
+            $program = $this->getProgramRecord($programUuid['program_uuid']);
+            array_push($programs, $program);
+        }
+        return $programs;
+    }
 }
