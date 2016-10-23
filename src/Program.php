@@ -116,10 +116,8 @@ class Program
 
     function getZipcodes()
     {
-		
         return array('zipCodes' => $this->program['zipCodes']);
     }
-
 
     function getProgramRecord($programUuid)
     {

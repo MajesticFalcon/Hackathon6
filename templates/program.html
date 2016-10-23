@@ -40,70 +40,70 @@
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="ami" value="{{ program.ami }}">
+                <input type="checkbox" class="form-check-input" name="ami" {% if requirements.ami %} checked {% endif %}>
                 HUD Funded (AMI under 30%)
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="veteran_dishonor" value="{{ program.veteran_dishonor }}">
+                <input type="checkbox" class="form-check-input" name="veteran_dishonor" {% if requirements.veteran_dishonor %} checked {% endif %}>
                 Veterans - Dishonorable Discharge
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="veteran_any" value="{{ program.veteran_any }}">
+                <input type="checkbox" class="form-check-input" name="veteran_any" {% if requirements.veteran_any %} checked {% endif %}>
                 Veterans - Other than Honorable
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="veteran_honorable" value="{{ program.honorable }}">
+                <input type="checkbox" class="form-check-input" name="veteran_honorable" {% if requirements.veteran_honorable %} checked {% endif %}>
                 Veterans - Honorable
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="family_under_5" value="{{ program.family_under_5 }}">
+                <input type="checkbox" class="form-check-input" name="family_under_5" {% if requirements.family_under_5 %} checked {% endif %}>
                 Families with Children Under 5
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="family_under_18" value="{{ program.family_under_18 }}">
+                <input type="checkbox" class="form-check-input" name="family_under_18" {% if requirements.family_under_18 %} checked {% endif %}>
                 Families with Children Under 18
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="sixty_plus" value="{{ program.sixty_plus }}">
+                <input type="checkbox" class="form-check-input" name="sixty_plus" {% if requirements.sixty_plus %} checked {% endif %}>
                 Senior Citizens 60+
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="youth_16_24" value="{{ program.youth_16_24 }}">
+                <input type="checkbox" class="form-check-input" name="youth_16_24" {% if requirements.youth_16_24 %} checked {% endif %}>
                 Youth Only 16-24
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="private_funds" value="{{ program.private_funds }}">
+                <input type="checkbox" class="form-check-input" name="private_funds" {% if requirements.private_funds %} checked {% endif %}>
                 Private Funding - No Restrictions
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="private_restricted" value="{{ program.private_restricted }}">
+                <input type="checkbox" class="form-check-input" name="private_restricted" {% if requirements.private_restricted %} checked {% endif %}>
                 Private Funding - With Restrictions
             </label>
             <textarea class="form-control" name="restrictions_text" rows="3" placeholder="Describe restriction(s)."></textarea>
@@ -113,14 +113,14 @@
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="resident_city" value="{{ program.resident_city }}">
+                <input type="checkbox" class="form-check-input" name="resident_city" {% if requirements.resident_city %} checked {% endif %}>
                 Residents of St. Louis City
             </label>
         </div>
 
         <div class="form-check">
             <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" name="resident_county" value="{{ program.resident_county }}">
+                <input type="checkbox" class="form-check-input" name="resident_county" {% if requirements.resident_county %} checked {% endif %}>
                 Residents of St. Louis County
             </label>
         </div>

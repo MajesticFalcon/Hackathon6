@@ -112,8 +112,8 @@ $app->get('/program/:id', function ($id) use ($twig) {
     $userId = $_SESSION['user_id'];
     $userArr = $user->fetchUser($userId);
     $programs = $program->getProgramsForProvider($userArr['p_id']);
-//    var_dump($record);exit;
-    echo $twig->render('program.html', array('program' => $record, 'user_programs' => $programs));
+
+    echo $twig->render('program.html', array('program' => $record, 'user_programs' => $programs, 'requirements' => $record['requirements']));
 });
 
 $app->post('/program', function () use ($twig) {
