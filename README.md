@@ -16,7 +16,7 @@ $ composer install
 
 ### Requirements:
 ```json
-//package.json 
+//composer.json 
 {
   "require": {
         "slim/slim": "^2.6",
