@@ -35,8 +35,8 @@
 	$app->post('/register', function () use ($twig) {
         $user = new Hackathon\User($_POST);
         if ($user->verifyUser($_POST)) {
-            $user->insertUser($user->getUser());
-			jump('program');
+            $p_id = $user->insertUser($user->getUser());
+			jump('profile/'.$p_id);
         } else {
 			echo $twig->render('register.html.twig', array('user' => $_POST, 'errors' => $user->getErrors()));
 		}
@@ -89,6 +89,7 @@
 		$programZips = $program->getZipcodes();
 
         var_dump($programArray, $programRequirements, $programZips);
+		$result = array_merge($programArray, $programRequirements, $programZips);
         exit;
     });
 

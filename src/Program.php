@@ -91,8 +91,9 @@ class Program
 
     function getProgram() {
         $arr = array();
+        $arr['provider_uuid'] = isset($_SESSION['provider_id']) ? $_SESSION['provider_id'] : 1;
         $arr['program_name'] = $this->program['program_name'];
-        $arr['amount'] = number_format($this->program['amount'], 2);
+        $arr['amount'] = isset($this->program['amount']) ? number_format((int)$this->program['amount'], 2) : 0;
         return $arr;
     }
 
@@ -106,10 +107,10 @@ class Program
                 $result[] = $attr;
             }
         }
-        return $result;
+        return array('requirements' => $result);
     }
 
     function getZipcodes() {
-        return $this->program['zipCodes'];
+        return array('zipCodes' => $this->program['zipCodes']);
     }
 }
